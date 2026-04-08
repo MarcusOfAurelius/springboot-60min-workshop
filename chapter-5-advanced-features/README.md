@@ -18,7 +18,28 @@ cd chapter-5-advanced-features
 mvn spring-boot:run
 ```
 
-Access: http://localhost:8084
+Access: `http://localhost:8084`
+
+## 🗄️ Accessing H2 Console
+
+Open `http://localhost:8084/h2-console` in your browser and enter:
+
+- **JDBC URL**: `jdbc:h2:file:./data/bookstore-ch5`
+- **Username**: `sa`
+- **Password**: (leave empty)
+
+Explore the database with reviews:
+```sql
+SELECT * FROM books;
+SELECT * FROM reviews;
+
+-- Check average ratings
+SELECT b.title, AVG(r.rating) as avg_rating, COUNT(r.id) as review_count
+FROM books b
+LEFT JOIN reviews r ON b.id = r.book_id
+GROUP BY b.id, b.title
+ORDER BY avg_rating DESC;
+```
 
 ## 🧪 Testing the API
 

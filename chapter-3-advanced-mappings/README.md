@@ -50,8 +50,27 @@ mvn spring-boot:run
 
 Access:
 - API: `http://localhost:8082`
-- H2 Console: `http://localhost:8082/h2-console`
-  - JDBC URL: `jdbc:h2:file:./data/bookstore-ch3`
+
+## 🗄️ Accessing H2 Console
+
+Open `http://localhost:8082/h2-console` in your browser and enter:
+
+- **JDBC URL**: `jdbc:h2:file:./data/bookstore-ch3`
+- **Username**: `sa`
+- **Password**: (leave empty)
+
+Try running SQL queries to explore entity relationships:
+```sql
+SELECT * FROM authors;
+SELECT * FROM books;
+SELECT * FROM categories;
+SELECT * FROM book_categories;  -- Many-to-Many join table
+
+-- Query with joins
+SELECT b.title, a.name as author_name 
+FROM books b 
+JOIN authors a ON b.author_id = a.id;
+```
 
 ## 🔍 Entity Relationships Explained
 

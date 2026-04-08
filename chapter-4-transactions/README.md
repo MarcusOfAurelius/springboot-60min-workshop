@@ -18,7 +18,29 @@ cd chapter-4-transactions
 mvn spring-boot:run
 ```
 
-Access: http://localhost:8083
+Access: `http://localhost:8083`
+
+## 🗄️ Accessing H2 Console
+
+Open `http://localhost:8083/h2-console` in your browser and enter:
+
+- **JDBC URL**: `jdbc:h2:file:./data/bookstore-ch4`
+- **Username**: `sa`
+- **Password**: (leave empty)
+
+Explore transaction data:
+```sql
+SELECT * FROM orders;
+SELECT * FROM order_items;
+SELECT * FROM books;
+
+-- Check order totals
+SELECT o.id, o.customer_name, o.total_amount, o.status, o.version
+FROM orders o;
+
+-- See stock levels after transactions
+SELECT id, title, stock FROM books ORDER BY stock ASC;
+```
 
 ## 🧪 Testing Transaction Scenarios
 
